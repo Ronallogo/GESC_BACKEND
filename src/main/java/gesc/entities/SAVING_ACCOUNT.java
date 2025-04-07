@@ -15,6 +15,7 @@ public class SAVING_ACCOUNT implements Serializable {
     private String numSavingAccount ;
     private Float interestRate  ;
     @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idAccount")
     private ACCOUNT account ;
 
     @Override
@@ -55,5 +56,13 @@ public class SAVING_ACCOUNT implements Serializable {
 	public SAVING_ACCOUNT(Float interestRate) {
 		this.interestRate = interestRate ; 
 		// TODO Auto-generated constructor stub
+	}
+
+	public Float getInterestRate() {
+		return interestRate;
+	}
+
+	public void setInterestRate(Float interestRate) {
+		this.interestRate = interestRate;
 	}
 }

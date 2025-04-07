@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class clientService {
+public class ClientService {
     @Autowired
     private  clientRepository cr;
     private final ServiceMail sm  = new ServiceMail() ;

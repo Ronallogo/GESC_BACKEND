@@ -11,14 +11,15 @@ import java.math.BigInteger;
 public class CHECKING_ACCOUNT implements Serializable {
     @Id
     private String numCheckingAccount  ;
-    private Float interestRate ;
+    private  BigInteger overDraft ;
     @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idAccount")
     private ACCOUNT account ;
     @Override
     public String toString() {
         return "CHECKING_ACCOUNT{" +
                 "numCheckingAccount='" + numCheckingAccount + '\'' +
-                ", interestRate=" + interestRate +
+                ",  overDraft=" +  this.overDraft +
                 account.toString() +
                 '}';
     }
@@ -28,22 +29,17 @@ public class CHECKING_ACCOUNT implements Serializable {
 	public void setNumCheckingAccount(String numCheckingAccount) {
 		this.numCheckingAccount = numCheckingAccount;
 	}
-	public Float getInterestRate() {
-		return interestRate;
-	}
-	public void setInterestRate(Float interestRate) {
-		this.interestRate = interestRate;
-	}
+
 	public ACCOUNT getAccount() {
 		return account;
 	}
 	public void setAccount(ACCOUNT account) {
 		this.account = account;
 	}
-	public CHECKING_ACCOUNT(String numCheckingAccount, Float interestRate, ACCOUNT account) {
+	public CHECKING_ACCOUNT(String numCheckingAccount,  BigInteger  overDraft, ACCOUNT account) {
 		super();
 		this.numCheckingAccount = numCheckingAccount;
-		this.interestRate = interestRate;
+		this.overDraft =  overDraft;
 		this.account = account;
 	}
     
@@ -51,5 +47,13 @@ public class CHECKING_ACCOUNT implements Serializable {
 	public CHECKING_ACCOUNT(BigInteger overDraft) {
 		//this
 		// TODO Auto-generated constructor stub
+	}
+
+	public BigInteger getOverDraft() {
+		return overDraft;
+	}
+
+	public void setOverDraft(BigInteger overDraft) {
+		this.overDraft = overDraft;
 	}
 }

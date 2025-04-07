@@ -21,11 +21,27 @@ public class AccountDataTransfer {
     
     private  String status ;
     
-   private String typeAccount ; 
+   private String typeAccount ;
+
+   private BigInteger overDraft ;
+
+
+	private Float interestRate ;
 	 
     private CLIENT client ;
-    
-    public Long getIdAccount() {
+
+	public AccountDataTransfer(Long idAccount, String numAccount, Date createAt, BigInteger balance, String status, CLIENT client) {
+		super();
+		this.idAccount = idAccount;
+		this.numAccount = numAccount;
+		this.createAt = createAt;
+		this.balance = balance;
+		this.status = status;
+		this.client = client;
+
+	}
+
+	public Long getIdAccount() {
 		return idAccount;
 	}
 	public void setIdAccount(Long idAccount) {
@@ -85,6 +101,22 @@ public class AccountDataTransfer {
 	public void setTypeAccount(String typeAccount) {
 		this.typeAccount = typeAccount;
 	}
+	public BigInteger getOverDraft() {
+		return overDraft;
+	}
 
-    
+	public void setOverDraft(BigInteger overDraft) {
+		this.overDraft = overDraft;
+	}
+
+	public Float getInterestRate() {
+		return interestRate;
+	}
+
+	public void setInterestRate(Float interestRate) {
+		this.interestRate = interestRate;
+	}
+
+
+
 }

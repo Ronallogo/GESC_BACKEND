@@ -2,7 +2,8 @@ package gesc.controller;
 
 import gesc.data.ClientDataTransfer;
 import gesc.entities.CLIENT;
-import gesc.service.clientService;
+import gesc.service.ClientService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/gesc/client")
 @CrossOrigin("*")
-public class clientController {
+public class ClientController {
     @Autowired
-    private clientService cs  ;
+    private ClientService cs  ;
     @PostMapping(value = "/create")
     public String create(@RequestBody CLIENT c){
         return  cs.create(c) ;
