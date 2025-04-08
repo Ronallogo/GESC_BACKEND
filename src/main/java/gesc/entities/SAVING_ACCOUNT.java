@@ -18,14 +18,7 @@ public class SAVING_ACCOUNT implements Serializable {
 	@JoinColumn(name = "idAccount")
     private ACCOUNT account ;
 
-    @Override
-    public String toString() {
-        return "SAVING_ACCOUNT{" +
-                "numSavingAccount='" + numSavingAccount + '\'' +
-                ", interestRate=" + interestRate +
-                account.toString() +
-                '}';
-    }
+
 
 	public String getNumSavingAccount() {
 		return numSavingAccount;
@@ -65,4 +58,6 @@ public class SAVING_ACCOUNT implements Serializable {
 	public void setInterestRate(Float interestRate) {
 		this.interestRate = interestRate;
 	}
+
+
 }

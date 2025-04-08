@@ -45,24 +45,17 @@ public class AccountService {
 		var account = this.ar.save(new ACCOUNT(generateNumAccount() ,  a.getCreateAt() , a.getBalance(), ACCOUNT_STATUS.CREATED , client.get() ));
 
 		if (Objects.equals(a.getTypeAccount(), "CHECKING_ACCOUNT")) {
-			var accountChecking = new CHECKING_ACCOUNT( a.getOverDraft()) ;
-			accountChecking.setNumCheckingAccount(account.getNumAccount());
-			this.car.save(accountChecking);
-
+			this.car.save(new CHECKING_ACCOUNT(account.getNumAccount() , a.getOverDraft() , account));
 		} else {
-			var accountSaving = new SAVING_ACCOUNT(a.getInterestRate()) ;
-			accountSaving.setNumSavingAccount(a.getNumAccount());
-			this.sar.save(accountSaving);
+			this.sar.save(new SAVING_ACCOUNT(account.getNumAccount() , a.getInterestRate() , account));
 		}
 
 		return account.toString();
 	}
 
-
 	public String generateNumAccount(){
 			return "000"+ new Random().nextInt(10000);
 	}
-
 
 	public AccountDataTransfer searchAccount(String numAccount , String typeAccount){
 		var account = this.ar.searchAccount(numAccount).get();
@@ -91,7 +84,6 @@ public class AccountService {
 
     }
 
-
 	public List<CheckingAccountDataTransfer> allCheckingAccount(){
 			return this.car.findAll().stream().map(x->
 					new CheckingAccountDataTransfer(
@@ -107,7 +99,6 @@ public class AccountService {
 					).collect(Collectors.toList());
 	}
 
-
 	public List<SavingAccountDataTransfer> allSavingAccount(){
 		return this.sar.findAll().stream().map(x->
 				new SavingAccountDataTransfer(
@@ -121,6 +112,23 @@ public class AccountService {
 				)
 
 		).collect(Collectors.toList());
+	}
+
+	public String changeStatus(String numAccount){
+		var account = this.ar.searchAccount(numAccount) ;
+		if(account.isEmpty()) return "NOT ACCOUNT" ;
+
+		if(Objects.equals(account.get().getStatus().name() , "CREATED")
+			|| Objects.equals(account.get().getStatus().name() , "ACTIVATED")){
+				account.get().setStatus(ACCOUNT_STATUS.SUSPENDED);
+				this.ar.save(account.get());
+
+		}else{
+			account.get().setStatus(ACCOUNT_STATUS.ACTIVATED);
+			this.ar.save(account.get());
+		}
+		return "STATUS_CHANGED" ;
+
 	}
 
 
